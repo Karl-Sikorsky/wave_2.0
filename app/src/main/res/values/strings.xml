@@ -21,4 +21,7 @@
     <string name="cancel">відміна</string>
     <string name="special">особливі побажання</string>
     <string name="proove">"Підтвердження інформації"</string>
+    <string name="hour">год.</string>
+    <string name="uah"> грн</string>
+    <string name="digit_keyboard_font">fonts/DroidSerif-Regular.ttf</string>
 </resources>

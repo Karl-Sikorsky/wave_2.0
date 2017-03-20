@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -17,7 +18,7 @@ public class Fragment_end extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_end, null);
-        ImageButton button_next = (ImageButton) v.findViewById(R.id.button_next);
+        ImageView button_next = (ImageView) v.findViewById(R.id.button_next);
         button_next.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 EventBus.getDefault().post(new DataEvent("i am done - fend say"));

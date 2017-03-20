@@ -7,9 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -32,14 +35,17 @@ public class Fragment_proove extends Fragment {
 
         prooveText = (TextView) v.findViewById(R.id.textViewProove) ;
         EventBus.getDefault().post(new DataEvent("send me total"));
-        ImageButton button_next = (ImageButton) v.findViewById(R.id.button_next);
+         final ImageView button_next = (ImageView) v.findViewById(R.id.button_next);
         button_next.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-/*
-                FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference myRef = database.getReference("message");
 
-                myRef.setValue("Hello, World!");*/
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference myRef = database.getReference("new buy");
+
+                myRef.setValue(prooveText.getText().toString());
+
+                prooveText.setText("Замовлення прийнято \n очікуйте");
+                button_next.setVisibility(View.GONE);
             }
         });
 
@@ -49,7 +55,9 @@ public class Fragment_proove extends Fragment {
     @Subscribe
     public void onGlobalEvent(TotalDataEvent event){
         Log.d("eventbus",event.message + " received");
-        prooveText.setText(prooveText.getText()+" "+event.message);
+        String res = event.message;
+        res = res.substring(1, res.length() - 1);
+        prooveText.setText(prooveText.getText()+" "+res);
 
     }
     @Override

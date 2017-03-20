@@ -1,6 +1,7 @@
 package com.example.wave_20;
 
 import android.app.Fragment;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,12 +18,14 @@ public class Fragment_bottles extends Fragment {
     TextView returned;
     TextView buy;
     TextView amount;
-    ImageButton button_next;
+    ImageView button_next;
+    String uah;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_bottles, null);
 
+        uah = " грн";
         amount = (TextView)v.findViewById(R.id.textViewAmount);
          buy = (TextView)v.findViewById(R.id.textViewBuy);
          returned = (TextView)v.findViewById(R.id.textViewReturn);
@@ -31,7 +34,7 @@ public class Fragment_bottles extends Fragment {
         ImageView plus_returned = (ImageView)v.findViewById(R.id.imageViewPlusReturn);
         ImageView minus_return = (ImageView)v.findViewById(R.id.imageViewMinusReturn);
 
-        button_next = (ImageButton) v.findViewById(R.id.button_next);
+        button_next = (ImageView) v.findViewById(R.id.button_next);
         button_next.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 EventBus.getDefault().post(new DataEvent("замовлено бутлів: "+buy.getText()+"\nбутлів на повернення: "+returned.getText()+"\nсумма замовлення: "+amount.getText()));

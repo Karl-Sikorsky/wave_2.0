@@ -2,13 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-        <item
-            android:id="@+id/itemShare"
-            app:showAsAction="always"
-            android:icon="@drawable/menu_custom"
-            >
 
-        </item>
 
         <item
             android:id="@+id/itemMenuCall"

@@ -27,6 +27,7 @@ public class MainActivity extends ActionBarActivity {
     Fragment_proove prooveWindow;
     Fragment_end endWindow;
     ArrayList<Fragment> fragmentStack;
+    ArrayList<String> dataStack;
 
     FragmentTransaction fTrans;
     EventBus myEventBus;
@@ -62,16 +63,13 @@ public class MainActivity extends ActionBarActivity {
         fragmentStack.add(prooveWindow);
         fragmentStack.add(endWindow);
 
-        fTrans = getFragmentManager().beginTransaction();
-        fCounter=0;
-        globalTotal="";
-        fTrans.add(R.id.frgmCont,fragmentStack.get(fCounter));
-        fTrans.commit();
-
+        drawStartFragment();
 
         //getActionBar().hide()
         //getActionBar().setDisplayHomeAsUpEnabled(true);
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -86,7 +84,7 @@ public class MainActivity extends ActionBarActivity {
 
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
                 ft.remove(fragmentStack.get(fCounter));
-
+                dataStack.remove(fCounter-1);
                 ft.add(R.id.frgmCont,fragmentStack.get(fCounter-1));
                 fCounter--;
 
@@ -103,6 +101,25 @@ public class MainActivity extends ActionBarActivity {
 
 
     }
+    @Subscribe
+    public void onEvent(DataEvent event){
+        if(event.message.equals("send me total")){sendTotal();}
+        else {
+            Log.d("eventbus", event.message);
+            dataStack.add(event.message);
+            globalTotal += event.message + "\n";
+            changeFragment();
+        }
+    }
+    private void drawStartFragment() {
+        fTrans = getFragmentManager().beginTransaction();
+        fCounter=0;
+        dataStack = new ArrayList<>();
+        globalTotal="";
+        fTrans.add(R.id.frgmCont,fragmentStack.get(fCounter));
+        fTrans.commit();
+
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
@@ -110,8 +127,6 @@ public class MainActivity extends ActionBarActivity {
         int id = item.getItemId();
 
         switch (id) {
-            case R.id.itemShare:
-                 return true;
             case R.id.itemMenuCall:
                 callHuman();
                 return true;
@@ -151,18 +166,9 @@ public class MainActivity extends ActionBarActivity {
 
     }
 
-    @Subscribe
-    public void onEvent(DataEvent event){
-        if(event.message.equals("send me total")){sendTotal();}
-        else {
-            Log.d("eventbus", event.message);
-            globalTotal += event.message + "\n";
-            changeFragment();
-        }
-    }
 
     private void sendTotal() {
-        EventBus.getDefault().post(new TotalDataEvent(globalTotal));
+        EventBus.getDefault().post(new TotalDataEvent(dataStack.toString()));
     }
 
     public void changeFragment(){
@@ -192,3 +198,9 @@ public class MainActivity extends ActionBarActivity {
     }
 
 }
+
+
+
+
+
+

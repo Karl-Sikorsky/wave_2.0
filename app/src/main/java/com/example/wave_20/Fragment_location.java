@@ -1,7 +1,10 @@
 package com.example.wave_20;
 
+import android.app.Activity;
+import android.app.Application;
 import android.app.DatePickerDialog;
 import android.app.Fragment;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,7 +14,9 @@ import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.greenrobot.eventbus.EventBus;
@@ -35,7 +40,8 @@ public class Fragment_location extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_location, null);
-        ImageButton button_next = (ImageButton) v.findViewById(R.id.button_next);
+        Typeface keys = Typeface.createFromAsset(inflater.getContext().getAssets(),   getString(R.string.digit_keyboard_font));
+        ImageView button_next = (ImageView) v.findViewById(R.id.button_next);
         button_next.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 EventBus.getDefault().post(new DataEvent("\nТелефон: "+telephonEdit.getText()+"\nАдреса: "+adressEdit.getText()+"\nБажаний час: "
@@ -45,9 +51,21 @@ public class Fragment_location extends Fragment {
 
 
         nameEdit = (EditText)v.findViewById(R.id.editName);
+        nameEdit.setTypeface(keys);
         telephonEdit = (EditText) v.findViewById(R.id.editPhone);
+        telephonEdit.setTypeface(keys);
         cityEdit = (EditText) v.findViewById(R.id.editCity);
+        cityEdit.setTypeface(keys);
         adressEdit = (EditText) v.findViewById(R.id.editAdres);
+adressEdit.setTypeface(keys);
+        TextView text1 = (TextView)v.findViewById(R.id.textView);
+        TextView text2 = (TextView)v.findViewById(R.id.textView2);
+        TextView text3 = (TextView)v.findViewById(R.id.textView3);
+        TextView text4 = (TextView)v.findViewById(R.id.textView4);
+        text1.setTypeface(keys);
+        text2.setTypeface(keys);
+        text3.setTypeface(keys);
+        text4.setTypeface(keys);
 
         rB = (RadioButton)v.findViewById(R.id.radioButton2);
         rB.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -90,6 +108,18 @@ public class Fragment_location extends Fragment {
 
 
         return v;
+    }
+    public void setFont(ViewGroup group, Typeface font) {
+        int count = group.getChildCount();
+        View v;
+        for(int i = 0; i < count; i++) {
+            v = group.getChildAt(i);
+            if(v instanceof TextView) {
+                ((TextView)v).setTypeface(font);
+            } else if(v instanceof ViewGroup) {
+                setFont((ViewGroup) v, font);
+            }
+        }
     }
 }
 

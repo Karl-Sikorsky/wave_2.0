@@ -3,16 +3,17 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/start_fon"
+    android:scaleType="fitXY"
     android:baselineAligned="false">
 
-    <ImageButton
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
         android:id="@+id/button_start"
         android:layout_gravity="center_horizontal"
         android:src="@drawable/start_button"
+        android:layout_marginBottom="10dp"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="24dp"/>
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

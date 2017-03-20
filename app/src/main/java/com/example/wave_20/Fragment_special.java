@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -21,7 +22,7 @@ public class Fragment_special extends Fragment {
         View v = inflater.inflate(R.layout.fragment_special, null);
         editSpecial = (EditText)v.findViewById(R.id.editSpecial);
 
-        ImageButton button_next = (ImageButton) v.findViewById(R.id.button_next);
+        ImageView button_next = (ImageView) v.findViewById(R.id.button_next);
         button_next.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 EventBus.getDefault().post(new DataEvent("\nСпеціальні побажання: "+editSpecial.getText()));
