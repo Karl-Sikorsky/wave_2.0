@@ -24,6 +24,8 @@
         android:text="@string/proove"
         android:id="@+id/textViewProove"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="40dp"/>
 
 </RelativeLayout>

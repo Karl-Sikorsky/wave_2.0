@@ -10,7 +10,8 @@
         android:text="@string/special"
         android:id="@+id/textView5"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"/>
 
     <ScrollView
         android:id="@+id/ScrollView01"
@@ -18,12 +19,15 @@
         android:layout_height="150dip"
         android:layout_below="@+id/textView5"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        >
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/editSpecial"/>
+            android:id="@+id/editSpecial"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"/>
 
     </ScrollView>
 

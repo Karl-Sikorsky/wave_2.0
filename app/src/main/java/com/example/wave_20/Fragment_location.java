@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Application;
 import android.app.DatePickerDialog;
 import android.app.Fragment;
+import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
@@ -31,19 +32,21 @@ public class Fragment_location extends Fragment {
     EditText cityEdit;
     EditText adressEdit;
     RadioButton rB;
+    RadioButton rB2;
 
     int hour;
     int day;
     int month;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_location, null);
         Typeface keys = Typeface.createFromAsset(inflater.getContext().getAssets(),   getString(R.string.digit_keyboard_font));
-        ImageView button_next = (ImageView) v.findViewById(R.id.button_next);
+        final ImageView button_next = (ImageView) v.findViewById(R.id.button_next);
         button_next.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                button_next.setImageBitmap(BitmapFactory.decodeResource(inflater.getContext().getResources(), R.drawable.next_pressed));
                 EventBus.getDefault().post(new DataEvent("\nТелефон: "+telephonEdit.getText()+"\nАдреса: "+adressEdit.getText()+"\nБажаний час: "
                         +String.valueOf(hour)+":00;"+String.valueOf(day)+"."+String.valueOf(month)));
             }
@@ -68,6 +71,10 @@ adressEdit.setTypeface(keys);
         text4.setTypeface(keys);
 
         rB = (RadioButton)v.findViewById(R.id.radioButton2);
+        rB.setTypeface(keys);
+        rB2 = (RadioButton)v.findViewById(R.id.radioButton);
+        rB2.setTypeface(keys);
+
         rB.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

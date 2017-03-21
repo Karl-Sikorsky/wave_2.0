@@ -1,6 +1,7 @@
 package com.example.wave_20;
 
 import android.app.Fragment;
+import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -21,14 +22,21 @@ public class Fragment_bottles extends Fragment {
     ImageView button_next;
     String uah;
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_bottles, null);
-
+        Typeface keys = Typeface.createFromAsset(inflater.getContext().getAssets(),   getString(R.string.digit_keyboard_font));
         uah = " грн";
         amount = (TextView)v.findViewById(R.id.textViewAmount);
+        amount.setTypeface(keys);
          buy = (TextView)v.findViewById(R.id.textViewBuy);
+        buy.setTypeface(keys);
          returned = (TextView)v.findViewById(R.id.textViewReturn);
+        returned.setTypeface(keys);
+        TextView tvToBuy = (TextView)v.findViewById(R.id.textViewToBuy);
+        tvToBuy.setTypeface(keys);
+        TextView tvToRet = (TextView)v.findViewById(R.id.textViewToReturn);
+        tvToRet.setTypeface(keys);
         ImageView plus_buy = (ImageView)v.findViewById(R.id.imageViewPlusBuy);
         ImageView minus_buy = (ImageView)v.findViewById(R.id.imageViewMinusBuy);
         ImageView plus_returned = (ImageView)v.findViewById(R.id.imageViewPlusReturn);
@@ -37,6 +45,7 @@ public class Fragment_bottles extends Fragment {
         button_next = (ImageView) v.findViewById(R.id.button_next);
         button_next.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                button_next.setImageBitmap(BitmapFactory.decodeResource(inflater.getContext().getResources(), R.drawable.next_pressed));
                 EventBus.getDefault().post(new DataEvent("замовлено бутлів: "+buy.getText()+"\nбутлів на повернення: "+returned.getText()+"\nсумма замовлення: "+amount.getText()));
             }
         });

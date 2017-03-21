@@ -13,12 +13,12 @@
         android:layout_width="wrap_content"
 
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/textViewToReturn"
-        android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/textViewToReturn"
-        android:layout_marginTop="167dp"
         android:text="@string/total"
-        android:textSize="30sp" />
+        android:textSize="30sp"
+        android:layout_marginBottom="56dp"
+        android:layout_above="@+id/textViewToBuy"
+        android:layout_alignRight="@+id/textViewToReturn"
+        android:layout_alignEnd="@+id/textViewToReturn" />
 
     <ImageView
         android:layout_width="wrap_content"

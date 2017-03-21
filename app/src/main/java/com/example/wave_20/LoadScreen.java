@@ -52,7 +52,7 @@ public class LoadScreen extends AppCompatActivity {
                 startActivity(intent);
 
             }
-        }, 4000);
+        }, 5000);
 
     }
 }

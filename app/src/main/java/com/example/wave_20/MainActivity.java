@@ -5,6 +5,8 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
@@ -13,6 +15,8 @@ import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
+import android.view.WindowManager;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -20,6 +24,8 @@ import org.greenrobot.eventbus.Subscribe;
 import java.util.ArrayList;
 
 public class MainActivity extends ActionBarActivity {
+    private static final String  STATE_FRAGMENT = "counter";
+    private static final String STATE_INFO = "info";
     Fragment_start startsWindow;
     Fragment_bottles bottlesWindow;
     Fragment_location locationWindow;
@@ -37,8 +43,16 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        supportRequestWindowFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
+
         setContentView(R.layout.activity_main);
+
+
+
         ActionBar actionbar = getSupportActionBar();
+        actionbar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#33000055")));
+
+
         actionbar.setHomeButtonEnabled(true);
         actionbar.setDisplayHomeAsUpEnabled(true);
 
@@ -182,8 +196,26 @@ public class MainActivity extends ActionBarActivity {
 
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState){
+        // Save the user's current game state
+        savedInstanceState.putInt(STATE_FRAGMENT, fCounter);
+        savedInstanceState.putStringArrayList(STATE_INFO, dataStack);
 
+        // Always call the superclass so it can save the view hierarchy state
+        super.onSaveInstanceState(savedInstanceState);
 
+    }
+
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        // Always call the superclass so it can restore the view hierarchy
+        super.onRestoreInstanceState(savedInstanceState);
+
+        // Restore state members from saved instance
+        fCounter = savedInstanceState.getInt(STATE_FRAGMENT);
+        dataStack = savedInstanceState.getStringArrayList(STATE_INFO);
+    }
+/*
     @Override
     public void onStop(){
         EventBus.getDefault().unregister(this);
@@ -196,6 +228,7 @@ public class MainActivity extends ActionBarActivity {
         super.onDestroy();
 
     }
+*/
 
 }
 
